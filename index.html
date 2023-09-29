@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="favicon.ico">
+    <title>Task 1.4</title>
+    <link rel="stylesheet" href="mystyle.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+  </head>
+  <body>
+
+<style>
+
+  @media only screen and (max-width: 600px) {
+    body {
+      background-color: rgb(154, 170, 175);
+    }
+  }
+    
+    a:link {
+        color:rgb(1, 17, 24);
+    }  
+    
+    a:hover {
+        color:rgb(239, 28, 28)
+    }
+
+    h1{
+        font-family: verdana;
+        font-size: 40px;
+
+    }
+
+    h2{
+        color:rgb(12, 5, 1);
+        align-items: center;
+        flex-direction: column;
+        font-family: verdana;
+        font-size: 20px;
+    }
+
+    h3{
+      color:rgb(13, 6, 1);
+      text-align: left;
+      font-family: verdana;
+      font-size: 20px;
+  }
+
+  h4{
+    color:rgb(16, 8, 1);
+    text-align: center;
+    font-family: verdana;
+    font-size: 20px;
+}
+
+h5{
+  color:rgb(16, 8, 1);
+  text-align: center;
+  font-family: verdana;
+  font-size: 20px;
+}
+  th, td {
+    border-style:groove;
+    border-color: #000808;
+  }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    th, td {
+      text-align: center;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #9aa8ef;
+    }
+
+    .item1 { grid-area: header; }
+    .item2 { grid-area: menu; }
+    .item3 { grid-area: main; }
+    .item4 { grid-area: right; }
+    .item5 { grid-area: footer; }
+    
+    .grid-container {
+      display: grid;
+      grid-template-areas:
+        'header header header header header header'
+        'menu main main main right right'
+        'menu footer footer footer footer footer';
+      gap: 10px;
+      background-color: rgba(1, 14, 11, 0.993);
+      padding: 10px;
+    }
+    
+    .grid-container > div {
+      background-color: rgba(28, 191, 156, 0.993);
+      text-align: center;
+      padding: 20px 0;
+      font-size: 30px;
+    }
+
+</style>
+
+
+<body>
+
+  <div class="grid-container">
+    <div class="item1"> <h1 style="text-align: Center;"> Personal Portfolio </h1>
+    </div>
+    <div class="item2"><h2> HTML Task History
+
+      <p><a href="https://github.com/RiaCody/Javascript-Methods" target="blank">Javascript-Methods</a></p>
+<p><a href="https://github.com/RiaCody/html-task" target="blank">html Beginner</a></p>
+ 
+    
+    </h2></div>
+
+    <div class="item3">
+      <h3>Employment History</h3>
+      <table style="width:100%">
+        <tr>
+          <th>Company</th>
+          <th>Role</th>
+          <th>Age</th>
+        </tr>
+        <tr v-for="job in employmentHistory">
+          <td>{{ job.company }}</td>
+          <td>{{ job.role }}</td>
+          <td>{{ job.age }}</td>
+        </tr>
+      </table>
+    </div>
+    
+      <div class="item4">
+        <div id="app4">
+          <button @click="toggleContent">CLICK ME!</button>
+          <p v-if="showContent">Surpise! :]</p>
+        </div>
+      </div>
+      
+
+      <div class="item5">
+        <div id="app5">
+          <h4>Insta Login</h4>
+            
+          <form action="/action_page.php">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username"><br>
+            <label for="pwd">Password:</label><br>
+            <input type="password" id="pwd" name="pwd"><br><br>
+            <input type="submit" value="Submit">
+          </form>
+        </div>
+      </div>
+
+      <div class="item6">
+        <div id="app6">
+          <h5>Type Below: {{ message }}</h5>
+          <input type="text" v-model="message">
+        </div>
+      </div>
+
+      <div class="item7">
+        <custom-button text="CLICK ME!" @click="handleClick"></custom-button>
+      </div>
+    
+    </div>
+      <div id="app"></div>
+  
+    </div>
+  </div>
+    
+  <script>
+    new Vue({
+      el: '.item3',
+      data: {
+        employmentHistory: [
+          { company: 'Civica.UK', role: 'Migration Engineer', age: 23 },
+          { company: 'Telstra', role: 'Dispatch/Stock Manager', age: 22 },
+          { company: 'The Missing Link', role: 'Director of First Impressions', age: 20 }
+
+        ]
+      }
+    });
+    </script>
+    
+  <script>
+    new Vue({
+      el: '.item4',
+      data: {
+        showContent: false, 
+      },
+      methods: {
+        toggleContent() {
+          this.showContent = !this.showContent; // Toggle showContent between true and false
+        },
+      },
+    });
+  </script>
+
+
+  <script>
+    new Vue({
+      el: '.item6', 
+      data: {
+        message: '' 
+      }
+    });
+  </script>
+
+
+  <script>
+    Vue.component('custom-button', {
+      props: ['text'],
+      template: `
+        <button @click="$emit('click')">{{ text }}</button>
+      `
+    });
+
+    new Vue({
+      el: '.item7',
+      methods: {
+        handleClick() {
+          alert('Button clicked!');
+        }
+      }
+    });
+    
+    </script>
+  </body>
+</html>
